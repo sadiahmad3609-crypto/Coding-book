@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101a35">
+<title>বাংলা কোডিং বই | HTML & CSS সহজ পাঠ</title>
+<style>
+:root{--ink:#17233b;--muted:#61708b;--paper:#fff;--bg:#edf2fb;--primary:#3157d5;--line:#dce4f2;--soft:#f3f6ff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Bengali","Hind Siliguri",system-ui,sans-serif;line-height:1.8}
+header{background:linear-gradient(135deg,#101a35,#263e82 65%,#536ee0);color:white;padding:30px 18px 25px;text-align:center}
+header .tag{display:inline-block;border:1px solid #ffffff55;border-radius:30px;padding:3px 13px;font-size:13px}
+header h1{font-size:clamp(27px,6vw,43px);line-height:1.35;margin:12px 0 5px}
+header p{margin:0;color:#e1e8ff}
+.wrap{max-width:1100px;margin:auto;padding:18px}
+.toolbar{position:sticky;top:0;z-index:5;background:#ffffffed;backdrop-filter:blur(10px);padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:9px;align-items:center}
+.toolbar input{flex:1;min-width:0;border:1px solid var(--line);border-radius:13px;padding:11px 13px;font:inherit;outline:none}
+.toolbar input:focus{border-color:var(--primary)}
+.toolbar button,.copy{border:0;background:var(--primary);color:white;border-radius:11px;padding:10px 14px;font:inherit;cursor:pointer}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:18px;align-items:start}
+nav{position:sticky;top:75px;background:white;border:1px solid var(--line);border-radius:18px;padding:14px;max-height:calc(100vh - 90px);overflow:auto}
+nav strong{display:block;margin:2px 8px 9px}
+nav a{display:block;text-decoration:none;color:#33415f;padding:7px 9px;border-radius:9px;font-size:14px}
+nav a:hover{background:var(--soft);color:var(--primary)}
+main{min-width:0}
+.chapter{background:white;border:1px solid var(--line);border-radius:18px;padding:clamp(17px,3vw,27px);margin-bottom:17px;box-shadow:0 5px 20px #243c7010;scroll-margin-top:75px}
+h2{font-size:23px;margin:0 0 12px;color:#1c3478}
+h3{font-size:18px;margin:22px 0 8px;color:#253c72}
+p{margin:8px 0}
+.note{background:#eef4ff;border-left:4px solid #5575e8;border-radius:10px;padding:12px 14px;margin:12px 0}
+.warning{background:#fff7e8;border-left:4px solid #e6a12b;border-radius:10px;padding:12px 14px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:#f0f4ff;color:#263d7b}
+code,.code{font-family:ui-monospace,Consolas,monospace;background:#f0f3fa;border-radius:5px;padding:2px 5px;color:#9b285b;overflow-wrap:anywhere}
+pre{background:#111b31;color:#e9efff;padding:15px;border-radius:13px;overflow:auto;line-height:1.65;font-size:13px;white-space:pre}
+pre code{background:none;color:inherit;padding:0}
+.copy{float:right;font-size:12px;padding:6px 10px;margin:0 0 6px 8px}
+.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px}
+.swatch{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:white}
+.swatch i{display:block;height:48px}
+.swatch div{padding:7px 9px;font-size:13px}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;background:#eaf0ff;color:#2947aa;font-size:12px;margin:2px}
+.demo{padding:14px;background:#f7f9fe;border:1px dashed #aab8d7;border-radius:12px;margin:10px 0}
+.demo-box{background:#dce9ff;border:3px solid #3157d5;border-radius:18px;padding:15px;margin:8px 0}
+footer{text-align:center;color:var(--muted);padding:25px 12px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}nav{position:relative;top:auto;max-height:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}nav strong{grid-column:1/-1}.toolbar{top:0}}
+@media(max-width:480px){.wrap{padding:11px}.chapter{border-radius:14px}table{font-size:12px}th,td{padding:7px}.toolbar button{padding:9px}}
+</style>
+</head>
+<body>
+<header>
+ <span class="tag">শূন্য থেকে শেখা • বাংলা গাইড</span>
+ <h1>বাংলা কোডিং বই</h1>
+ <p>HTML ও CSS-এর চিহ্ন, রং, ডিজাইন এবং দরকারি কোড—সহজ বাংলায়</p>
+</header>
+<div class="toolbar">
+ <input id="search" type="search" placeholder="বইয়ের মধ্যে খুঁজুন: যেমন margin, গোল বর্ডার, রং..." aria-label="বইয়ে খুঁজুন">
+ <button onclick="clearSearch()">সব দেখাও</button>
+</div>
+<div class="wrap">
+<div class="layout">
+<nav>
+ <strong>📚 সূচিপত্র</strong>
+ <a href="#start">১. কোডিং পরিচিতি</a><a href="#symbols">২. চিহ্নের নাম</a>
+ <a href="#html">৩. HTML ট্যাগ</a><a href="#css">৪. CSS কী ও কীভাবে</a>
+ <a href="#box">৫. Margin, Padding ও Border</a><a href="#color">৬. সব রঙের কোড</a>
+ <a href="#text">৭. লেখার ডিজাইন</a><a href="#layout">৮. সাইজ ও অবস্থান</a>
+ <a href="#background">৯. ব্যাকগ্রাউন্ড</a><a href="#button">১০. বাটন ও Hover</a>
+ <a href="#units">১১. মাপের একক</a><a href="#selectors">১২. CSS Selector</a>
+ <a href="#example">১৩. সম্পূর্ণ উদাহরণ</a><a href="#glossary">১৪. শব্দকোষ</a>
+</nav>
+<main id="book">
+<section class="chapter" id="start">
+<h2>১. কোডিং কী?</h2>
+<p>কোডিং হলো কম্পিউটার বা ব্রাউজারকে নির্দিষ্ট কাজ করার নির্দেশ লেখা। ওয়েবসাইট বানাতে সাধারণত তিনটি জিনিস কাজে লাগে:</p>
+<ul><li><b>HTML:</b> ওয়েবপেজের কাঠামো তৈরি করে—শিরোনাম, লেখা, ছবি, বাটন।</li><li><b>CSS:</b> ওয়েবপেজকে সুন্দর করে—রং, সাইজ, দূরত্ব, বর্ডার, অবস্থান।</li><li><b>JavaScript:</b> ওয়েবপেজে কাজ করায়—বাটনে ক্লিক, হিসাব, মেনু খোলা ইত্যাদি।</li></ul>
+<div class="note">এই বইয়ে HTML ও CSS-এর ভিত্তি এবং দরকারি CSS Property-গুলো বাংলায় বোঝানো হয়েছে।</div>
+<h3>HTML ও CSS একসঙ্গে</h3>
+<pre><code>&lt;h1&gt;আমার ওয়েবসাইট&lt;/h1&gt;
+&lt;p&gt;এটি একটি অনুচ্ছেদ।&lt;/p&gt;</code></pre>
+<pre><code>h1 {
+  color: blue;
+  text-align: center;
+}</code></pre>
+</section>
+
+<section class="chapter" id="symbols">
+<h2>২. কোডিংয়ের চিহ্নগুলোর নাম</h2>
+<p>কোড লেখার সময় নিচের চিহ্নগুলো বারবার ব্যবহার হবে।</p>
+<table><tr><th>চিহ্ন</th><th>বাংলা নাম / পরিচিত নাম</th><th>কাজ</th></tr>
+<tr><td><code>&lt; &gt;</code></td><td>অ্যাঙ্গেল ব্র্যাকেট / কৌণিক বন্ধনী</td><td>HTML ট্যাগ শুরু ও শেষ করে।</td></tr>
+<tr><td><code>/</code></td><td>স্ল্যাশ</td><td>HTML ট্যাগ বন্ধ করতে ব্যবহৃত হয়: <code>&lt;/p&gt;</code></td></tr>
+<tr><td><code>{ }</code></td><td>কার্লি ব্রেস / দ্বিতীয় বন্ধনী</td><td>CSS-এর নিয়মের অংশ ঘিরে রাখে।</td></tr>
+<tr><td><code>( )</code></td><td>প্যারেনথেসিস / প্রথম বন্ধনী</td><td>ফাংশন বা কিছু মানের অংশ ঘিরে রাখে।</td></tr>
+<tr><td><code>[ ]</code></td><td>স্কয়ার ব্র্যাকেট / বর্গ বন্ধনী</td><td>অ্যারেতে বা Attribute Selector-এ কাজে লাগে।</td></tr>
+<tr><td><code>:</code></td><td>কোলন</td><td>CSS-এ Property ও Value আলাদা করে।</td></tr>
+<tr><td><code>;</code></td><td>সেমিকোলন</td><td>CSS-এর একটি নিয়ম শেষ করে।</td></tr>
+<tr><td><code>,</code></td><td>কমা</td><td>একাধিক মান বা Selector আলাদা করে।</td></tr>
+<tr><td><code>.</code></td><td>ডট / বিন্দু</td><td>CSS Class বোঝায়: <code>.box</code></td></tr>
+<tr><td><code>#</code></td><td>হ্যাশ / নম্বর চিহ্ন</td><td>CSS ID বোঝায়; Hex রঙেও ব্যবহৃত হয়।</td></tr>
+<tr><td><code>*</code></td><td>অ্যাস্টেরিস্ক / তারকা</td><td>সব HTML Element নির্বাচন করে।</td></tr>
+<tr><td><code>=</code></td><td>সমান চিহ্ন</td><td>HTML Attribute-এ মান বসায়।</td></tr>
+<tr><td><code>" "</code></td><td>ডাবল কোটেশন</td><td>লেখা বা Attribute-এর মান ঘিরে রাখে।</td></tr>
+<tr><td><code>' '</code></td><td>সিঙ্গেল কোটেশন</td><td>ডাবল কোটেশনের বিকল্প।</td></tr>
+<tr><td><code>!</code></td><td>বিস্ময় চিহ্ন</td><td><code>!important</code>-এ অগ্রাধিকার বোঝায়।</td></tr>
+<tr><td><code>_</code></td><td>আন্ডারস্কোর</td><td>নামের মাঝে ফাঁকা স্থানের বিকল্প হিসেবে ব্যবহৃত হতে পারে।</td></tr>
+<tr><td><code>-</code></td><td>হাইফেন / বিয়োগ চিহ্ন</td><td>CSS-এর যৌগিক নামে ব্যবহৃত হয়: <code>font-size</code></td></tr>
+<tr><td><code>+</code></td><td>প্লাস</td><td>গণনা ও Selector-এ ব্যবহৃত হয়।</td></tr>
+<tr><td><code>&amp;</code></td><td>অ্যাম্পারস্যান্ড</td><td>HTML Entity বা CSS nesting-এ দেখা যায়।</td></tr>
+</table>
+</section>
+
+<section class="chapter" id="html">
+<h2>৩. দরকারি HTML ট্যাগ</h2>
+<table><tr><th>ট্যাগ</th><th>কাজ</th></tr>
+<tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>ব্রাউজারকে জানায় এটি HTML5 ডকুমেন্ট।</td></tr>
+<tr><td><code>&lt;html&gt;</code></td><td>পুরো HTML পেজের মূল Element।</td></tr>
+<tr><td><code>&lt;head&gt;</code></td><td>পেজের তথ্য, Title, CSS ইত্যাদি রাখে।</td></tr>
+<tr><td><code>&lt;title&gt;</code></td><td>ব্রাউজার ট্যাবের নাম।</td></tr>
+<tr><td><code>&lt;body&gt;</code></td><td>পেজে দেখা যায় এমন কনটেন্ট রাখে।</td></tr>
+<tr><td><code>&lt;h1&gt;...&lt;h6&gt;</code></td><td>বড় থেকে ছোট শিরোনাম।</td></tr>
+<tr><td><code>&lt;p&gt;</code></td><td>অনুচ্ছেদ বা প্যারাগ্রাফ।</td></tr>
+<tr><td><code>&lt;br&gt;</code></td><td>লাইন ভাঙে।</td></tr>
+<tr><td><code>&lt;hr&gt;</code></td><td>আলাদা অংশের মাঝে রেখা দেয়।</td></tr>
+<tr><td><code>&lt;img&gt;</code></td><td>ছবি দেখায়; <code>src</code> ও <code>alt</code> লাগে।</td></tr>
+<tr><td><code>&lt;a&gt;</code></td><td>লিংক তৈরি করে; <code>href</code> দিয়ে ঠিকানা দেয়।</td></tr>
+<tr><td><code>&lt;button&gt;</code></td><td>বাটন তৈরি করে।</td></tr>
+<tr><td><code>&lt;div&gt;</code></td><td>বিভিন্ন Element একসঙ্গে গ্রুপ করে।</td></tr>
+<tr><td><code>&lt;span&gt;</code></td><td>লেখার ছোট অংশ আলাদা করে সাজায়।</td></tr>
+<tr><td><code>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</code></td><td>বুলেট ও নম্বরযুক্ত তালিকা তৈরি করে।</td></tr>
+<tr><td><code>&lt;input&gt;</code></td><td>ব্যবহারকারীর কাছ থেকে তথ্য নেয়।</td></tr>
+<tr><td><code>&lt;form&gt;</code></td><td>ফর্মের ইনপুটগুলো একত্র করে।</td></tr>
+</table>
+<div class="note">HTML ট্যাগের বেশিরভাগের শুরু ও শেষ আছে। যেমন <code>&lt;p&gt;লেখা&lt;/p&gt;</code>। কিন্তু <code>&lt;img&gt;</code> ও <code>&lt;br&gt;</code>-এর আলাদা Closing Tag লাগে না।</div>
+</section>
+
+<section class="chapter" id="css">
+<h2>৪. CSS কী? CSS লেখার নিয়ম</h2>
+<p>CSS-এর পূর্ণরূপ Cascading Style Sheets। এটি HTML Element-এর চেহারা নিয়ন্ত্রণ করে।</p>
+<pre><code>selector {
+  property: value;
+}</code></pre>
+<ul><li><b>Selector:</b> কোন Element সাজাবেন।</li><li><b>Property:</b> কোন বিষয় বদলাবেন।</li><li><b>Value:</b> কী মান দেবেন।</li></ul>
+<p>উদাহরণ:</p>
+<pre><code>p {
+  color: red;
+  font-size: 18px;
+}</code></pre>
+<p>এখানে <code>p</code> হলো Selector, <code>color</code> ও <code>font-size</code> হলো Property, আর <code>red</code> ও <code>18px</code> হলো Value।</p>
+<h3>CSS কোথায় লিখবেন?</h3>
+<p><b>১. Internal CSS:</b> HTML-এর <code>&lt;head&gt;</code>-এর ভেতরে <code>&lt;style&gt;</code> ট্যাগে।</p>
+<pre><code>&lt;style&gt;
+  body { background: #f0f0f0; }
+&lt;/style&gt;</code></pre>
+<p><b>২. External CSS:</b> আলাদা <code>style.css</code> ফাইলে লিখে HTML-এ যুক্ত করুন:</p>
+<pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+<p><b>৩. Inline CSS:</b> HTML ট্যাগের <code>style</code> Attribute-এ সরাসরি লিখুন।</p>
+<pre><code>&lt;p style="color: blue;"&gt;নীল লেখা&lt;/p&gt;</code></pre>
+</section>
+
+<section class="chapter" id="box">
+<h2>৫. Margin, Padding, Border ও গোল কোণা</h2>
+<p>একটি Box-এর চারপাশের দূরত্ব ও বর্ডার বোঝার জন্য এই অংশটি সবচেয়ে গুরুত্বপূর্ণ।</p>
+<div class="demo">
+ <div style="background:#ffe5a8;padding:13px;border:1px dashed #bb8a22">
+  <small>Margin — বাইরের ফাঁকা জায়গা</small>
+  <div class="demo-box"><b>Content</b><br>Padding হলো Content ও Border-এর মাঝের ভেতরের ফাঁকা জায়গা।</div>
+ </div>
+</div>
+<table><tr><th>CSS Property</th><th>বাংলায় কাজ</th><th>উদাহরণ</th></tr>
+<tr><td><code>margin</code></td><td>Element-এর বাইরের ফাঁকা জায়গা।</td><td><code>margin: 20px;</code></td></tr>
+<tr><td><code>padding</code></td><td>Element-এর ভেতরের ফাঁকা জায়গা।</td><td><code>padding: 15px;</code></td></tr>
+<tr><td><code>border</code></td><td>Element-এর চারপাশে বর্ডার/সীমানা।</td><td><code>border: 2px solid red;</code></td></tr>
+<tr><td><code>border-radius</code></td><td>বর্ডারের কোণা গোল করে।</td><td><code>border-radius: 15px;</code></td></tr>
+<tr><td><code>border-width</code></td><td>বর্ডার মোটা বা চিকন করে।</td><td><code>border-width: 1px;</code></td></tr>
+<tr><td><code>border-style</code></td><td>বর্ডারের ধরন ঠিক করে।</td><td><code>border-style: dashed;</code></td></tr>
+<tr><td><code>border-color</code></td><td>বর্ডারের রং ঠিক করে।</td><td><code>border-color: blue;</code></td></tr>
+<tr><td><code>box-shadow</code></td><td>বক্সের চারপাশে ছায়া দেয়।</td><td><code>box-shadow: 0 4px 12px #0003;</code></td></tr>
+<tr><td><code>outline</code></td><td>বর্ডারের বাইরে অতিরিক্ত রেখা দেয়।</td><td><code>outline: 2px solid green;</code></td></tr>
+</table>
+<h3>বর্ডার গোল করবেন কীভাবে?</h3>
+<pre><code>.box {
+  border: 2px solid #3157d5;
+  border-radius: 20px;
+}</code></pre>
+<h3>বর্ডার ছোট বা চিকন করবেন কীভাবে?</h3>
+<p><code>border-width</code> কমিয়ে দিন। যেমন ৫px থেকে ১px করলে বর্ডার চিকন হবে।</p>
+<pre><code>.box {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #333;
+}</code></pre>
+<h3>শুধু এক পাশের বর্ডার</h3>
+<pre><code>border-top: 2px solid red;
+border-right: 2px solid blue;
+border-bottom: 2px solid green;
+border-left: 2px solid orange;</code></pre>
+<h3>Margin ও Padding-এর চার পাশ আলাদা</h3>
+<pre><code>margin: 10px 20px 30px 40px;
+/* উপর, ডান, নিচ, বাম */
+
+padding: 10px 20px;
+/* উপর-নিচ 10px, ডান-বাম 20px */</code></pre>
+<p>সব কোণা একরকম না করে আলাদা করতে পারেন:</p>
+<pre><code>border-radius: 20px 5px 20px 5px;
+/* উপর-বাম, উপর-ডান, নিচ-ডান, নিচ-বাম */</code></pre>
+</section>
+
+<section class="chapter" id="color">
+<h2>৬. CSS রঙের কোড—রঙসহ</h2>
+<p>রং লেখার কয়েকটি পদ্ধতি আছে: রঙের নাম, HEX, RGB এবং RGBA। HEX কোড সাধারণত <code>#</code> দিয়ে শুরু হয়।</p>
+<h3>জনপ্রিয় রঙের HEX কোড</h3>
+<div class="color-grid">
+<div class="swatch"><i style="background:#000000"></i><div>কালো<br><code>#000000</code></div></div>
+<div class="swatch"><i style="background:#FFFFFF;border-bottom:1px solid #ddd"></i><div>সাদা<br><code>#FFFFFF</code></div></div>
+<div class="swatch"><i style="background:#FF0000"></i><div>লাল<br><code>#FF0000</code></div></div>
+<div class="swatch"><i style="background:#00FF00"></i><div>সবুজ (Lime)<br><code>#00FF00</code></div></div>
+<div class="swatch"><i style="background:#0000FF"></i><div>নীল<br><code>#0000FF</code></div></div>
+<div class="swatch"><i style="background:#FFFF00"></i><div>হলুদ<br><code>#FFFF00</code></div></div>
+<div class="swatch"><i style="background:#FFA500"></i><div>কমলা<br><code>#FFA500</code></div></div>
+<div class="swatch"><i style="background:#800080"></i><div>বেগুনি<br><code>#800080</code></div></div>
+<div class="swatch"><i style="background:#FFC0CB"></i><div>গোলাপি<br><code>#FFC0CB</code></div></div>
+<div class="swatch"><i style="background:#A52A2A"></i><div>বাদামি<br><code>#A52A2A</code></div></div>
+<div class="swatch"><i style="background:#808080"></i><div>ধূসর<br><code>#808080</code></div></div>
+<div class="swatch"><i style="background:#00FFFF"></i><div>সায়ান<br><code>#00FFFF</code></div></div>
+<div class="swatch"><i style="background:#008000"></i><div>গাঢ় সবুজ<br><code>#008000</code></div></div>
+<div class="swatch"><i style="background:#000080"></i><div>নেভি নীল<br><code>#000080</code></div></div>
+<div class="swatch"><i style="background:#FFD700"></i><div>সোনালি<br><code>#FFD700</code></div></div>
+<div class="swatch"><i style="background:#40E0D0"></i><div>টারকয়েজ<br><code>#40E0D0</code></div></div>
+<div class="swatch"><i style="background:#4B0082"></i><div>ইন্ডিগো<br><code>#4B0082</code></div></div>
+<div class="swatch"><i style="background:#F5F5DC"></i><div>বেইজ<br><code>#F5F5DC</code></div></div>
+<div class="swatch"><i style="background:#DC143C"></i><div>ক্রিমসন<br><code>#DC143C</code></div></div>
+<div class="swatch"><i style="background:#7FFFD4"></i><div>অ্যাকুয়াম্যারিন<br><code>#7FFFD4</code></div></div>
+<div class="swatch"><i style="background:#FF6347"></i><div>টমেটো<br><code>#FF6347</code></div></div>
+<div class="swatch"><i style="background:#6A5ACD"></i><div>স্লেট ব্লু<br><code>#6A5ACD</code></div></div>
+<div class="swatch"><i style="background:#2E8B57"></i><div>সি গ্রিন<br><code>#2E8B57</code></div></div>
+<div class="swatch"><i style="background:#D2691E"></i><div>চকলেট<br><code>#D2691E</code></div></div>
+</div>
+<h3>রঙ লেখার পদ্ধতি</h3>
+<pre><code>color: red;                 /* রঙের নাম */
+color: #ff0000;             /* HEX */
+color: rgb(255, 0, 0);      /* RGB */
+color: rgba(255, 0, 0, .5); /* ৫০% স্বচ্ছ লাল */
+background: transparent;   /* স্বচ্ছ ব্যাকগ্রাউন্ড */</code></pre>
+<div class="note">HEX কোডে ৬টি অক্ষর/সংখ্যা থাকে: প্রথম ২টি লাল (Red), পরের ২টি সবুজ (Green), শেষ ২টি নীল (Blue)। প্রতিটি অংশের মান 00 থেকে FF।</div>
+<h3>গ্রেডিয়েন্ট রং</h3>
+<pre><code>background: linear-gradient(135deg, #101a35, #3157d5);</code></pre>
+</section>
+
+<section class="chapter" id="text">
+<h2>৭. লেখার ডিজাইন করার CSS</h2>
+<table><tr><th>Property</th><th>কাজ</th><th>উদাহরণ</th></tr>
+<tr><td><code>color</code></td><td>লেখার রং।</td><td><code>color: red;</code></td></tr>
+<tr><td><code>font-size</code></td><td>লেখার আকার বড়/ছোট।</td><td><code>font-size: 20px;</code></td></tr>
+<tr><td><code>font-family</code></td><td>লেখার ফন্ট।</td><td><code>font-family: Arial;</code></td></tr>
+<tr><td><code>font-weight</code></td><td>লেখা মোটা/পাতলা।</td><td><code>font-weight: bold;</code></td></tr>
+<tr><td><code>font-style</code></td><td>সোজা বা বাঁকা লেখা।</td><td><code>font-style: italic;</code></td></tr>
+<tr><td><code>text-align</code></td><td>লেখা বামে, মাঝে বা ডানে।</td><td><code>text-align: center;</code></td></tr>
+<tr><td><code>text-decoration</code></td><td>আন্ডারলাইন/কাটা দাগ।</td><td><code>text-decoration: underline;</code></td></tr>
+<tr><td><code>text-transform</code></td><td>ইংরেজি অক্ষর বড়/ছোট করে।</td><td><code>text-transform: uppercase;</code></td></tr>
+<tr><td><code>line-height</code></td><td>লাইনের মাঝের উচ্চতা।</td><td><code>line-height: 1.8;</code></td></tr>
+<tr><td><code>letter-spacing</code></td><td>অক্ষরের মাঝের দূরত্ব।</td><td><code>letter-spacing: 2px;</code></td></tr>
+<tr><td><code>word-spacing</code></td><td>শব্দের মাঝের দূরত্ব।</td><td><code>word-spacing: 5px;</code></td></tr>
+<tr><td><code>text-shadow</code></td><td>লেখায় ছায়া।</td><td><code>text-shadow: 1px 2px 4px #888;</code></td></tr>
+</table>
+</section>
+
+<section class="chapter" id="layout">
+<h2>৮. সাইজ, অবস্থান ও সাজানোর CSS</h2>
+<table><tr><th>Property</th><th>বাংলায় কাজ</th><th>উদাহরণ</th></tr>
+<tr><td><code>width</code></td><td>প্রস্থ বা চওড়া নির্ধারণ।</td><td><code>width: 300px;</code></td></tr>
+<tr><td><code>height</code></td><td>উচ্চতা নির্ধারণ।</td><td><code>height: 150px;</code></td></tr>
+<tr><td><code>min-width</code></td><td>সর্বনিম্ন প্রস্থ।</td><td><code>min-width: 100px;</code></td></tr>
+<tr><td><code>max-width</code></td><td>সর্বোচ্চ প্রস্থ।</td><td><code>max-width: 500px;</code></td></tr>
+<tr><td><code>min-height</code></td><td>সর্বনিম্ন উচ্চতা।</td><td><code>min-height: 100vh;</code></td></tr>
+<tr><td><code>max-height</code></td><td>সর্বোচ্চ উচ্চতা।</td><td><code>max-height: 400px;</code></td></tr>
+<tr><td><code>display</code></td><td>Element কীভাবে দেখাবে।</td><td><code>display: flex;</code></td></tr>
+<tr><td><code>flex-direction</code></td><td>Flex-এর আইটেম সারি না কলামে।</td><td><code>flex-direction: column;</code></td></tr>
+<tr><td><code>justify-content</code></td><td>Flex-এর প্রধান দিক বরাবর সাজায়।</td><td><code>justify-content: center;</code></td></tr>
+<tr><td><code>align-items</code></td><td>Flex-এর আড়াআড়ি দিক বরাবর সাজায়।</td><td><code>align-items: center;</code></td></tr>
+<tr><td><code>gap</code></td><td>আইটেমগুলোর মাঝের ফাঁকা।</td><td><code>gap: 10px;</code></td></tr>
+<tr><td><code>position</code></td><td>Element-এর অবস্থান নিয়ন্ত্রণ।</td><td><code>position: relative;</code></td></tr>
+<tr><td><code>top/right/bottom/left</code></td><td>অবস্থানের দিক থেকে দূরত্ব।</td><td><code>top: 10px;</code></td></tr>
+<tr><td><code>z-index</code></td><td>কোন Element সামনে থাকবে।</td><td><code>z-index: 10;</code></td></tr>
+<tr><td><code>overflow</code></td><td>বক্সের বাইরে কনটেন্ট গেলে কী হবে।</td><td><code>overflow: auto;</code></td></tr>
+<tr><td><code>box-sizing</code></td><td>Width-এ Padding/Border গণনা হবে কি না।</td><td><code>box-sizing: border-box;</code></td></tr>
+</table>
+<h3>একটি বক্সকে ঠিক মাঝখানে আনবেন</h3>
+<pre><code>.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}</code></pre>
+<h3>Element পুরো স্ক্রিনের প্রস্থ নেবে</h3>
+<pre><code>.box {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}</code></pre>
+</section>
+
+<section class="chapter" id="background">
+<h2>৯. ব্যাকগ্রাউন্ড ও স্বচ্ছতা</h2>
+<table><tr><th>Property</th><th>কাজ</th><th>উদাহরণ</th></tr>
+<tr><td><code>background-color</code></td><td>পেছনের রং।</td><td><code>background-color: black;</code></td></tr>
+<tr><td><code>background-image</code></td><td>পেছনে ছবি/গ্রেডিয়েন্ট।</td><td><code>background-image: url("pic.jpg");</code></td></tr>
+<tr><td><code>background-size</code></td><td>ব্যাকগ্রাউন্ড ছবির মাপ।</td><td><code>background-size: cover;</code></td></tr>
+<tr><td><code>background-position</code></td><td>ব্যাকগ্রাউন্ড ছবির অবস্থান।</td><td><code>background-position: center;</code></td></tr>
+<tr><td><code>background-repeat</code></td><td>ছবি বারবার দেখাবে কি না।</td><td><code>background-repeat: no-repeat;</code></td></tr>
+<tr><td><code>opacity</code></td><td>পুরো Element স্বচ্ছ করে।</td><td><code>opacity: .5;</code></td></tr>
+</table>
+<pre><code>body {
+  background: linear-gradient(135deg, #07152f, #183d72);
+  color: white;
+}</code></pre>
+</section>
+
+<section class="chapter" id="button">
+<h2>১০. বাটন, Hover ও Animation</h2>
+<h3>সুন্দর বাটন</h3>
+<pre><code>.my-button {
+  background: #3157d5;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: .3s;
+}
+.my-button:hover {
+  background: #19368f;
+  transform: translateY(-2px);
+}</code></pre>
+<p>Hover মানে মাউস বাটনের ওপর নিলে যে পরিবর্তন হয়। মোবাইলে Hover সব সময় একইভাবে কাজ নাও করতে পারে।</p>
+<h3>দরকারি Property</h3>
+<table><tr><th>Property</th><th>কাজ</th></tr>
+<tr><td><code>cursor</code></td><td>মাউস পয়েন্টারের ধরন বদলায়।</td></tr>
+<tr><td><code>transition</code></td><td>পরিবর্তন মসৃণ করে।</td></tr>
+<tr><td><code>transform</code></td><td>Element সরায়, ঘোরায় বা বড়-ছোট করে।</td></tr>
+<tr><td><code>animation</code></td><td>অ্যানিমেশন চালায়।</td></tr>
+<tr><td><code>filter</code></td><td>Blur, brightness ইত্যাদি প্রভাব দেয়।</td></tr>
+</table>
+<pre><code>@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.box {
+  animation: pulse 2s infinite;
+}</code></pre>
+</section>
+
+<section class="chapter" id="units">
+<h2>১১. CSS-এর মাপের একক</h2>
+<table><tr><th>একক</th><th>সহজ ব্যাখ্যা</th></tr>
+<tr><td><code>px</code></td><td>পিক্সেল; নির্দিষ্ট মাপ।</td></tr>
+<tr><td><code>%</code></td><td>Parent Element-এর তুলনায় শতকরা মাপ।</td></tr>
+<tr><td><code>em</code></td><td>সাধারণত বর্তমান Element-এর ফন্ট সাইজের অনুপাতে।</td></tr>
+<tr><td><code>rem</code></td><td>Root HTML ফন্ট সাইজের অনুপাতে।</td></tr>
+<tr><td><code>vw</code></td><td>স্ক্রিনের প্রস্থের ১%।</td></tr>
+<tr><td><code>vh</code></td><td>স্ক্রিনের উচ্চতার ১%।</td></tr>
+<tr><td><code>vmin</code></td><td>Viewport-এর ছোট পাশের ১%।</td></tr>
+<tr><td><code>auto</code></td><td>ব্রাউজার নিজে মান নির্ধারণ করে।</td></tr>
+</table>
+<div class="note"><code>100vh</code> মানে Viewport-এর উচ্চতার ১০০%। মোবাইল ব্রাউজারের ঠিকানা বারের কারণে কিছু ক্ষেত্রে <code>100dvh</code> বেশি উপযোগী।</div>
+</section>
+
+<section class="chapter" id="selectors">
+<h2>১২. CSS Selector—কোন Element নির্বাচন করবেন?</h2>
+<table><tr><th>Selector</th><th>কাজ</th><th>উদাহরণ</th></tr>
+<tr><td><code>p</code></td><td>সব Paragraph নির্বাচন।</td><td><code>p { color: red; }</code></td></tr>
+<tr><td><code>.box</code></td><td>box Class-যুক্ত Element।</td><td><code>.box { padding: 10px; }</code></td></tr>
+<tr><td><code>#header</code></td><td>header ID-যুক্ত Element।</td><td><code>#header { height: 60px; }</code></td></tr>
+<tr><td><code>*</code></td><td>সব Element।</td><td><code>* { box-sizing: border-box; }</code></td></tr>
+<tr><td><code>div p</code></td><td>div-এর ভেতরের সব p।</td><td><code>div p { color: blue; }</code></td></tr>
+<tr><td><code>button:hover</code></td><td>মাউস নিলে বাটন।</td><td><code>button:hover { opacity: .8; }</code></td></tr>
+<tr><td><code>input:focus</code></td><td>Input-এ ফোকাস থাকলে।</td><td><code>input:focus { border-color: blue; }</code></td></tr>
+<tr><td><code>h1, h2</code></td><td>h1 ও h2 দুটিই নির্বাচন।</td><td><code>h1, h2 { color: navy; }</code></td></tr>
+</table>
+</section>
+
+<section class="chapter" id="example">
+<h2>১৩. অনুশীলন: একটি সুন্দর কার্ড তৈরি</h2>
+<p>নিচের কোডটি একটি HTML ফাইলে কপি করে ব্রাউজারে খুললে গোল বর্ডার, ছায়া ও বাটনসহ একটি কার্ড দেখা যাবে।</p>
+<button class="copy" onclick="copyCode('fullExample')">কোড কপি</button>
+<pre id="fullExample"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="bn"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;title&gt;আমার প্রথম কার্ড&lt;/title&gt;
+&lt;style&gt;
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #edf2fb;
+    font-family: Arial, sans-serif;
+  }
+  .card {
+    width: 280px;
+    padding: 22px;
+    background: white;
+    border: 2px solid #3157d5;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px #20345b30;
+    text-align: center;
+  }
+  .card h2 { color: #203b88; }
+  .card p { color: #555; line-height: 1.7; }
+  .card button {
+    background: #3157d5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="card"&gt;
+    &lt;h2&gt;স্বাগতম!&lt;/h2&gt;
+    &lt;p&gt;আমি HTML ও CSS শিখছি।&lt;/p&gt;
+    &lt;button onclick="alert('ধন্যবাদ!')"&gt;ক্লিক করুন&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<div class="demo"><div class="demo-box" style="max-width:300px;margin:auto;text-align:center;box-shadow:0 8px 25px #20345b30"><h3 style="margin:0;color:#203b88">স্বাগতম!</h3><p>আমি HTML ও CSS শিখছি।</p><button onclick="alert('ধন্যবাদ!')" style="background:#3157d5;color:white;border:0;border-radius:10px;padding:10px 20px">ক্লিক করুন</button></div></div>
+</section>
+
+<section class="chapter" id="glossary">
+<h2>১৪. ছোট শব্দকোষ ও মনে রাখার নিয়ম</h2>
+<table><tr><th>ইংরেজি শব্দ</th><th>বাংলা অর্থ</th></tr>
+<tr><td>Element</td><td>HTML-এর একটি উপাদান।</td></tr>
+<tr><td>Tag</td><td>HTML-এর নির্দেশক চিহ্ন, যেমন <code>&lt;p&gt;</code>।</td></tr>
+<tr><td>Attribute</td><td>ট্যাগের অতিরিক্ত তথ্য, যেমন <code>href</code>, <code>src</code>।</td></tr>
+<tr><td>Selector</td><td>CSS দিয়ে যাকে নির্বাচন করা হয়।</td></tr>
+<tr><td>Property</td><td>যে বৈশিষ্ট্য বদলাবেন।</td></tr>
+<tr><td>Value</td><td>Property-তে দেওয়া মান।</td></tr>
+<tr><td>Responsive</td><td>মোবাইল, ট্যাব ও কম্পিউটারে মানিয়ে যায়।</td></tr>
+<tr><td>Viewport</td><td>ব্রাউজারে বর্তমানে দেখা যায় এমন অংশ।</td></tr>
+<tr><td>Debugging</td><td>কোডের ভুল খুঁজে ঠিক করা।</td></tr>
+</table>
+<h3>দ্রুত মনে রাখুন</h3>
+<ul><li>লেখার রং বদলাতে: <code>color</code></li><li>বক্সের পেছনের রং বদলাতে: <code>background-color</code></li><li>বক্স গোল করতে: <code>border-radius</code></li><li>বর্ডার চিকন করতে: <code>border-width</code></li><li>বক্সের বাইরের ফাঁকা: <code>margin</code></li><li>বক্সের ভেতরের ফাঁকা: <code>padding</code></li><li>বক্সের প্রস্থ: <code>width</code></li><li>বক্সের উচ্চতা: <code>height</code></li><li>লেখা মাঝখানে: <code>text-align: center</code></li><li>বক্স মাঝখানে: Flexbox-এর <code>justify-content</code> ও <code>align-items</code></li></ul>
+<div class="warning"><b>মনে রাখবেন:</b> CSS-এর সব Property সব Element-এ একইভাবে কাজ করে না। কোড লেখার পর ব্রাউজারে পরীক্ষা করুন। ভুল হলে কোলন <code>:</code>, সেমিকোলন <code>;</code> এবং কার্লি ব্রেস <code>{ }</code> ঠিক আছে কি না দেখুন।</div>
+</section>
+</main>
+</div>
+</div>
+<footer>বাংলা কোডিং বই • HTML & CSS সহজ পাঠ<br>শিখুন, অনুশীলন করুন, নিজের ওয়েবসাইট তৈরি করুন।</footer>
+<script>
+function copyCode(id){
+ const el=document.getElementById(id);
+ const text=el.innerText;
+ if(navigator.clipboard && window.isSecureContext){
+  navigator.clipboard.writeText(text).then(()=>alert('কোড কপি হয়েছে!')).catch(()=>fallbackCopy(text));
+ }else fallbackCopy(text);
+}
+function fallbackCopy(text){
+ const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();
+ try{document.execCommand('copy');alert('কোড কপি হয়েছে!')}catch(e){alert('কপি করা যায়নি। কোড সিলেক্ট করে কপি করুন।')}
+ area.remove();
+}
+function clearSearch(){document.getElementById('search').value='';filterBook('')}
+function filterBook(q){
+ const chapters=[...document.querySelectorAll('.chapter')];
+ chapters.forEach(c=>{c.style.display=!q||c.innerText.toLowerCase().includes(q.toLowerCase())?'':'none'});
+}
+document.getElementById('search').addEventListener('input',e=>filterBook(e.target.value.trim()));
+</script>
+</body>
+</html>
